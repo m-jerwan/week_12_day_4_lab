@@ -1,0 +1,7 @@
+.wrapper{
+    display: flex;
+    flex-direction: row;
+}
+.wrapper div{
+    width: 49%;
+}

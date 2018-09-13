@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const mountainListView = new MountainListView();
   mountainListView.bindEvents();
 
-  
+  const selectView = new SelectView();
+  selectView.bindEvents();
 
   const mountains = new Mountains();
   mountains.bindEvents();

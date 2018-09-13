@@ -1,11 +1,12 @@
 const PubSub = require ('../helpers/pub_sub');
 const RequestHelper = require ('../helpers/request_helper');
-const Mountains = function(){
 
+const Mountains = function(){
+    this.data = null;  
 }
 
 Mountains.prototype.bindEvents = function() {
-    this.getData();      
+    this.getData();    
 }
 
 Mountains.prototype.getData = function() {
@@ -14,6 +15,15 @@ Mountains.prototype.getData = function() {
     request.get()
         .then((data) => {
             PubSub.publish('Mountains:data-ready', data);
+            this.data = data;
+        })
+        .then(()=>{
+            let regions = {};
+            this.data.forEach(mountain => {
+                regions[mountain.region]= "";
+            });
+            uniqueRegions = Object.keys(regions);
+            PubSub.publish('Mountains:regions-ready',uniqueRegions)
         })
         .catch((banana) => {
             console.error(banana)
