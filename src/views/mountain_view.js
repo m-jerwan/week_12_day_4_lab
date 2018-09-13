@@ -7,36 +7,24 @@ MountainView.prototype.render = function(){
     const mountainContainer = document.createElement('div');
     mountainContainer.classList.add('individualMountainContainer');
 
-    const mountainNameELement = this.createMountainHeading(this.mountainData.name);
-    this.container.appendChild(mountainNameELement);
+    const mountainNameELement = this.createHtmlElement('h3', this.container, this.mountainData.name);
 
     const mountainDetailsUl = document.createElement('ul');
     this.container.appendChild(mountainDetailsUl);
 
-    const mountainDetailsList = this.createList(this.mountainData.height, this.mountainData.meaning, mountainDetailsUl);
-    // container.appendChild(mountainDetailsList);
-
+    let content = `Height: ${this.mountainData.height}`
+    const mountainHeightElement = this.createHtmlElement('li',mountainDetailsUl, content);
+    
+    content = `Name meaning: ${this.mountainData.meaning}`
+    const mountainNameMeaningElement = this.createHtmlElement('li',mountainDetailsUl, content);
+    
     this.container.appendChild(mountainContainer);
 }
 
-
-
-
-MountainView.prototype.createMountainHeading = function(mountainName){
-    const title = document.createElement('h3');
-    title.textContent = mountainName;  
-    return title;
+MountainView.prototype.createHtmlElement = function(tag, container, content){
+    const tempElement = document.createElement(tag);
+    tempElement.textContent = content;
+    container.appendChild(tempElement);
 }
-
-MountainView.prototype.createList = function(mountainHeight, mountainNameMeaning, mountainDetailsUl){
-    const mountainHeightElement = document.createElement('li');
-    mountainHeightElement.textContent = `Height: ${mountainHeight}m`;
-    mountainDetailsUl.appendChild(mountainHeightElement);
-
-    const mountainNameMeaningElement = document.createElement('li');
-    mountainNameMeaningElement.textContent = `Name meaning: ${mountainNameMeaning}`;
-    mountainDetailsUl.appendChild(mountainNameMeaningElement);
-}
-
 
 module.exports = MountainView;
